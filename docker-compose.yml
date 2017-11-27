@@ -1,0 +1,13 @@
+version: "2"
+services:
+  web:
+    build: games_api/.
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/games
+    links:
+      - db
+
+  db:
+    image: mongo:latest
