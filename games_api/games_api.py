@@ -10,7 +10,7 @@ client = MongoClient(host='mongo')
 def games():
 
     db = client.gamesdb
-    _consoles = db.consoles.find()
+    _consoles = db.platforms.find()
     consoles = [console for console in _consoles]
 
     return render_template('consoles.html', consoles=consoles)
