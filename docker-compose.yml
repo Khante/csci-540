@@ -1,6 +1,6 @@
 version: "2"
 services:
-  api:
+  info:
     build: games_api/.
     ports:
       - "5000:5000"
@@ -8,6 +8,13 @@ services:
       - ./games_api:/usr/src/app
     depends_on:
       - mongo
+
+  reviews:
+    build: reviews_api/.
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./reviews_api:/usr/src/app
 
   mongo:
     image: mongo:3.4

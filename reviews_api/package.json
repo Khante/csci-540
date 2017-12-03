@@ -1,0 +1,15 @@
+{
+  "name": "reviews_api",
+  "version": "1.0.0",
+  "description": "Microservice for uploading, rating and viewing game reviews",
+  "main": "reviews.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node reviews.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
