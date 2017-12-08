@@ -44,7 +44,12 @@ router.route('/reviews/:gameTitle')
 		review.find({'game_title': req.params.gameTitle},(err, results) => {
 			if (err)
 				res.send(err);
-			res.json(results);
+			if (results.length === 0) {
+				console.log("Nothing found, check game title?");
+				res.status(204).send();
+			}
+			else
+				res.json(results);
 		});
 	});
 
