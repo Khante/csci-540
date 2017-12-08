@@ -13,8 +13,6 @@ services:
     build: reviews_api/.
     ports:
       - "8080:8080"
-    volumes:
-      - ./reviews_api:/usr/src/app
     depends_on:
       - mongo
 
