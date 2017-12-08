@@ -13,7 +13,7 @@ const PORT = 8080;
 const HOST = '0.0.0.0';
 
 // Database Connections
-const uri = 'mongodb://0.0.0.0:27017/gamesdb';
+const uri = 'mongodb://mongo:27017/gamesdb';
 const options = {
 	useMongoClient: true,
 }
