@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 // Database models
 const genre = require('./models/genre.js');
 const platform = require('./models/platform.js');
+const review = require('./models/review.js');
 
 // Constants
 const PORT = 8080;
@@ -16,6 +17,9 @@ const HOST = '0.0.0.0';
 const uri = 'mongodb://mongo:27017/gamesdb';
 const options = {
 	useMongoClient: true,
+	autoReconnect: true,
+	reconnectTries: Number.MAX_VALUE,
+	reconnectInterval: 500,
 }
 const mongoDB = mongoose.connect(uri, options);
 
@@ -35,12 +39,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Routes
-router.route('/genres')
+router.route('/reviews/:gameTitle')
 	.get((req, res) => {
-		genre.find({},(err, genres) => {
+		review.find({'game_title': req.params.gameTitle},(err, results) => {
 			if (err)
 				res.send(err);
-			res.json(genres);
+			res.json(results);
 		});
 	});
 
