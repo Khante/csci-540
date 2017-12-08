@@ -2,6 +2,6 @@
 
 ```./back.py```
 
-```ngrok 8000```
+```ngrok http 8000```
 
 **WAOW**
