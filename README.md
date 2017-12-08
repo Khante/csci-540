@@ -11,7 +11,8 @@ Mongo data will be saved locally under `/data/mongodb`
 
 Local directories are mounted inside the containers so you can make changes without having to rebuild.
 
-Current Services (port)
-- Game Information (5000)
-- Game Reviews (8080)
-- MongoDB (27017)
+Current Services - name, parent directory, (port)
+- info, /games_api (5000)
+- reviews, /reviews (8080)
+- mongo, /data (27017)
+- gateway, /server (8000)
