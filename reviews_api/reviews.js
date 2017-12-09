@@ -4,6 +4,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+// Fix deprecation warning?
+mongoose.Promise = global.Promise;
+
 // Database models
 const genre = require('./models/genre.js');
 const platform = require('./models/platform.js');
@@ -36,7 +39,7 @@ router.use((req, res, next) => {
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({type: 'application/json'}));
 
 // Routes
 router.route('/reviews/:gameTitle')
@@ -50,6 +53,21 @@ router.route('/reviews/:gameTitle')
 			}
 			else
 				res.json(results);
+		});
+	})
+	.post((req, res) => {
+		if (!req.body.review_text || !req.body.review_score){
+			res.statusMessage = "A review must contain the fields review_text and review_score";
+			res.status(400).end();
+		}
+		let newReview = new review({"game_title": req.params.gameTitle,
+																"review_text": req.body.review_text,
+																"review_score": req.body.review_score});
+		newReview.save((err) => {
+			if (err) {
+				console.log(err);
+				res.status(500).send();
+			} else res.status(201).send();
 		});
 	});
 
