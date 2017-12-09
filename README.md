@@ -1,5 +1,5 @@
 # csci-540
-Advanced Databases Final Project
+##Advanced Databases Final Project
 
 Run `docker-compose build` to update build.
 
@@ -11,8 +11,13 @@ Mongo data will be saved locally under `/data/mongodb`
 
 Local directories are mounted inside the containers so you can make changes without having to rebuild.
 
-Current Services - name, parent directory, (port)
+Services are visible to other services via docker networking, they can be reached at `<serviceName>:<PORT>`
+
+
+## Current Services - service name, parent directory, (port), endpoints
 - info, /games_api (5000)
 - reviews, /reviews (8080)
+	- `GET /api/reviews/<GAME_TITLE>`
+	- `POST /api/reviews/<GAME_TITLE>`
 - mongo, /data (27017)
 - gateway, /server (8000)
