@@ -59,15 +59,36 @@ router.route('/reviews/:gameTitle')
 		if (!req.body.review_text || !req.body.review_score){
 			res.statusMessage = "A review must contain the fields review_text and review_score";
 			res.status(400).end();
+		} else {
+			let newReview = new review({"game_title": req.params.gameTitle,
+																	"review_text": req.body.review_text,
+																	"review_score": req.body.review_score});
+			newReview.save((err) => {
+				if (err) {
+					console.log(err);
+					res.status(500).send();
+				} else res.status(201).send();
+			});
 		}
-		let newReview = new review({"game_title": req.params.gameTitle,
-																"review_text": req.body.review_text,
-																"review_score": req.body.review_score});
-		newReview.save((err) => {
-			if (err) {
-				console.log(err);
-				res.status(500).send();
-			} else res.status(201).send();
+	});
+
+router.route('/score/:gameTitle')
+	.get((req, res) => {
+		review.find({'game_title': req.params.gameTitle},(err, results) => {
+			if (err)
+				res.send(err);
+			if (results.length === 0) {
+				console.log("Nothing found, check game title?");
+				res.status(204).send();
+			}
+			else {
+				console.log(results);
+				let sum = results.reduce((prev, review) => {
+					return prev + (+(review.review_score)||2.5)
+				}, 0);
+				let avg = sum/results.length;
+				res.json({"Average Score": avg, "Number of reviews": results.length});
+			}
 		});
 	});
 
