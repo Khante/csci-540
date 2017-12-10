@@ -1,6 +1,19 @@
 <html>
-<head><link rel="stylesheet" type="text/css" href="../muh.css"></head>
-<body>
-    <center><h1>Reviews</h1></center>
-</body>
-</html> 
+    <head>
+        <link rel="stylesheet" type="text/css" href="../muh.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <script>
+        function butt() {
+            $.get('test1',{'serv':$('#mybox').val()}, function(data){$( "#res" ).html(jQuery.parseHTML(data))});
+        }
+        </script>
+        <center><h1>Reviews</h1></center>
+        <form>
+            <input type="text" id="mybox">
+            <input type="button" onclick="butt();">
+        </form>
+        <p id="res"></p>
+    </body>
+</html>
