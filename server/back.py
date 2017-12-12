@@ -22,7 +22,7 @@ class S(BaseHTTPRequestHandler):
         if prsd.query != '':
             qprsd = urlparse.parse_qs(prsd.query)
             print qprsd
-            #got ourselves a query
+            self.wfile.write(queryHandle(qprsd))
         else:
             self.path='.'+self.path
             if os.path.isdir(self.path):
@@ -30,13 +30,17 @@ class S(BaseHTTPRequestHandler):
             f=open(self.path)
             self.wfile.write(f.read())
 
-
     def do_HEAD(self):
         self._set_headers()
         
     def do_POST(self):
         pass
 
+
+#Return a string/html of the query results
+#args has whatever the client sent as a dictionary.
+def queryHandle(args):
+    pass
         
 def run(server_class=HTTPServer, handler_class=S, port=8000):
     server_address = ('', port)
