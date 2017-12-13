@@ -1,4 +1,4 @@
-from flask import (Flask, render_template, request, flash, abort)
+from flask import (Flask, render_template, request, flash, abort, jsonify)
 import redis
 import sys
 from wtforms import Form, TextField, validators
@@ -98,6 +98,16 @@ def publish():
         flash('Published!')
 
     return render_template('publish.html', form=form, msgs=messages)
+
+
+@app.route('/subscriptions/')
+def list_subscriptions():
+    return jsonify(redis_db.pubsub_channels())
+
+
+@app.route('/publications/<title>')
+def list_publications(title):
+    return jsonify(messages[title])
 
 
 if __name__ == "__main__":
