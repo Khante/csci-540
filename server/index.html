@@ -5,55 +5,66 @@
     <link rel="stylesheet" type="text/css" href="muh.css">
   </head>
   <body class="grad">
-    <script>
+    
+  <h1 class='rainbow'>Vidya Gaems</h1>
+  <div>
+    <h3>Query</h3>
+    Service:<select id="drpdwn" onchange="serviceChange();">
+      <option value="review">review</option>
+      <option value="info">info</option>
+      <option value="news">news</option>
+      <option value="poll">poll</option>
+    </select>
+    <br>
+    <a id="titlecon">Title:<input type="text" id="namebox" value=""></a>
+    <br>
+    <a id="genrecon">Genre:<input type="text" id="genrebox" value=""></a>
+    <br>
+    <a id="uidcon">Uid:<input type="text" id="uidbox" value=""></a>
+    <br>
+    <input type="button" value="Go!" onclick="req();"><br>
+  </div>
+
+  <div>
+    <h3>Result:</h3><a id="res"></a>
+  </div>
+
+  <div>
+    <h3>Post</h3>
+
+
+  <script>
         function req() {
             $.get(
               'test1',
               {
                 'service':$('#drpdwn').val(),
                 'genre':$('#genrebox').val(),
-                'name':$('#namebox').val()
+                'title':$('#titlebox').val(),
+                'uid':$('#uidbox').val()
               },
               function(data){
                 $("#res").append(jQuery.parseHTML(data));
                 $("#res").append('<br/>')});
         }
-        function sub() {
-            $.get(
-              'test1',
-              {
-                'service':"subscribe",
-                'email':$("#subbox").val()
-              },
-              function(data){
-                $("#res").append(jQuery.parseHTML(data))
-                $("#res").append('<br/>')
-              });
-        }
-    </script>
-  <h1>Vidya Gaems</h1>
 
-  <div>
-    <h3>Query</h3>
-    Service:<select id="drpdwn">
-      <option value="review">review</option>
-      <option value="info">info</option>
-      <option value="news">news</option>
-    </select>
-    <br>
-    Name:<input type="text" id="namebox" value="">
-    <br>
-    Genre:<input type="text" id="genrebox" value="">
-    <br>
-    <input type="button" value="Go!" onclick="req();"><br>
-  </div>
-  <div>
-    <h3>Subscribe</h3>
-    Email:<input type="text" id="subbox" value=""><br>
-    <input type="button" value="Subscribe" onclick="sub();">
-  </div>
-  <div>
-    <h3>Result:</h3><a id="res"></a>
-  </div>
+        function serviceChange() {
+          var v = $('#drpdwn').val()
+          $('#genrecon').prop('hidden', true)
+          $('#titlecon').prop('hidden', true)
+          $('#uidcon').prop('hidden', true)
+          if (v == 'news') {
+            $('#titlecon').prop('hidden', false)
+            // $('#uidcon').prop('hidden', false)            
+          } else if (v == 'review') {
+            $('#titlecon').prop('hidden', false)
+          } else if (v == 'info') {
+            $('#genrecon').prop('hidden', false)
+            $('#titlecon').prop('hidden', false)
+          }
+        }
+
+        serviceChange();
+    </script>
   </body>
 </html>
