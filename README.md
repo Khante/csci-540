@@ -17,9 +17,14 @@ Services are visible to other services via docker networking, they can be reache
 	- `GET /games/<GAME_TITLE>`
 	- `GET /consoles/<CONSOLE_NAME>`
 	- `GET /genre/<GENRE_NAME>`
-- reviews, /reviews (8080)
+- reviews, /reviews_api (8080)
 	- `GET /api/reviews/<GAME_TITLE>`
 	- `POST /api/reviews/<GAME_TITLE>`
 	- `GET /api/score/<GAME_TITLE>`
+- news, /news_api (5001)
+	- `GET /`
+	- `GET/POST /subscribe/`
+	- `GET/POST /publish/`
 - mongo, /data (27017)
+- redis, (6379)
 - gateway, /server (8000)
