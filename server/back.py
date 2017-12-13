@@ -48,13 +48,13 @@ def queryHandle(args):
         url='http://reviews:8080/api/reviews/%s'%args['title'][0]
         r = requests.get(url)
         print r
-        return repr(r)
+        return r.text
 
     elif s == 'info':
         print 'Info service selected'
         url='http://news:5000/%s'%args['title'][0]
         r = requests.get(url)
-        return repr(r)
+        return r.text
 
     elif s == 'news':
         print 'News service selected'
@@ -63,7 +63,7 @@ def queryHandle(args):
         data={'channel': channel}
         r = requests.post(url, data=data)
         print r
-        return repr(r)
+        return r.text
     elif s == 'poll':
         pass
         # get a big string of all subscribed news
