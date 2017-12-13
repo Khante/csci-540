@@ -44,11 +44,6 @@ services:
     build: server/.
     ports:
       - "8000:8000"
-<<<<<<< HEAD
-    volumes:
-      - ./server:/usr/src/app
-=======
->>>>>>> d73d45d97080d4be6fc6ecdf1f6974119aa38e68
     depends_on:
       - mongo
       - reviews

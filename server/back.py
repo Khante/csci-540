@@ -45,22 +45,28 @@ def queryHandle(args):
     s=args['service'][0]
     if s == 'review':
         print 'Review service selected'
-        url='http://reviews:8080/api/reviews/Frogger'
+        url='http://reviews:8080/api/reviews/%s'%args['title'][0]
         r = requests.get(url)
         print r
         return repr(r)
-        # data=args['data'][0]
-        # res=requests.post(url,data=data)
-        # return repr(res)
+
     elif s == 'info':
         print 'Info service selected'
+        url='http://news:5000/%s'%args['title'][0]
+        r = requests.get(url)
+        return repr(r)
+
     elif s == 'news':
         print 'News service selected'
-        url='http://news:5000/subscribe/'
-        data={'name': 'joe', 'channel': 'Halo'}
+        channel=args['title'][0]
+        url='http://news:5001/subscribe/'
+        data={'channel': channel}
         r = requests.post(url, data=data)
         print r
         return repr(r)
+    elif s == 'poll':
+        pass
+        # get a big string of all subscribed news
     else:
         print s
     return 'Not implemented'
