@@ -31,27 +31,28 @@
               });
         }
     </script>
-  <h1>Vidya Gaems</h1>
-
+  <h1 class='rainbow'>Vidya Gaems</h1>
   <div>
     <h3>Query</h3>
     Service:<select id="drpdwn">
-      <option value="review">review</option>
-      <option value="info">info</option>
+      <option value="review">Review</option>
+      <option value="info">Info</option>
+      <option value="subscribe">Subscribe</option>
     </select>
     <br>
     Name:<input type="text" id="namebox" value="">
     <br>
     Genre:<input type="text" id="genrebox" value="">
     <br>
+    Email:<input type="text" id="emailbox" value="">
     <input type="button" value="Go!" onclick="req();"><br>
   </div>
-  <div>
+  <!-- <div>
     <h3>Subscribe</h3>
     Email:<input type="text" id="subbox" value=""><br>
     <input type="button" value="Subscribe" onclick="sub();">
   </div>
-  <div>
+  <div> -->
     <h3>Result:</h3><a id="res"></a>
   </div>
   </body>
