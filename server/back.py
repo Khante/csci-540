@@ -34,7 +34,7 @@ class S(BaseHTTPRequestHandler):
 
     def do_HEAD(self):
         self._set_headers()
-        
+
     def do_POST(self):
         pass
 
@@ -45,17 +45,27 @@ def queryHandle(args):
     s=args['service'][0]
     if s == 'review':
         print 'Review service selected'
-        url='http://127.0.0.1:8080' #idk how to query our service.
+        url='http://reviews:8080/api/reviews/Frogger'
+        r = requests.get(url)
+        print r
+        return repr(r)
         # data=args['data'][0]
         # res=requests.post(url,data=data)
         # return repr(res)
     elif s == 'info':
         print 'Info service selected'
+    elif s == 'news':
+        print 'News service selected'
+        url='http://news:5000/subscribe/'
+        data={'name': 'joe', 'channel': 'Halo'}
+        r = requests.post(url, data=data)
+        print r
+        return repr(r)
     else:
         print s
     return 'Not implemented'
 
-        
+
 def run(server_class=HTTPServer, handler_class=S, port=8000):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)

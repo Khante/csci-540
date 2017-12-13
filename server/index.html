@@ -1,7 +1,7 @@
 <html>
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <title>Vidya Games</title>  
+    <title>Vidya Games</title>
     <link rel="stylesheet" type="text/css" href="muh.css">
   </head>
   <body class="grad">
@@ -13,7 +13,7 @@
                 'service':$('#drpdwn').val(),
                 'genre':$('#genrebox').val(),
                 'name':$('#namebox').val()
-              }, 
+              },
               function(data){
                 $("#res").append(jQuery.parseHTML(data));
                 $("#res").append('<br/>')});
@@ -24,7 +24,7 @@
               {
                 'service':"subscribe",
                 'email':$("#subbox").val()
-              }, 
+              },
               function(data){
                 $("#res").append(jQuery.parseHTML(data))
                 $("#res").append('<br/>')
@@ -35,9 +35,9 @@
   <div>
     <h3>Query</h3>
     Service:<select id="drpdwn">
-      <option value="review">Review</option>
-      <option value="info">Info</option>
-      <option value="subscribe">Subscribe</option>
+      <option value="review">review</option>
+      <option value="info">info</option>
+      <option value="news">news</option>
     </select>
     <br>
     Name:<input type="text" id="namebox" value="">
