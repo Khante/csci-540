@@ -1,13 +1,58 @@
 <html>
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Vidya Games</title>  
     <link rel="stylesheet" type="text/css" href="muh.css">
   </head>
-  <body>
+  <body class="grad">
+    <script>
+        function req() {
+            $.get(
+              'test1',
+              {
+                'service':$('#drpdwn').val(),
+                'genre':$('#genrebox').val(),
+                'name':$('#namebox').val()
+              }, 
+              function(data){
+                $("#res").append(jQuery.parseHTML(data));
+                $("#res").append('<br/>')});
+        }
+        function sub() {
+            $.get(
+              'test1',
+              {
+                'service':"subscribe",
+                'email':$("#subbox").val()
+              }, 
+              function(data){
+                $("#res").append(jQuery.parseHTML(data))
+                $("#res").append('<br/>')
+              });
+        }
+    </script>
+  <h1>Vidya Gaems</h1>
 
-    <center><h1>Vidya Games</h1></center>
-    <h2>Services</h2>
-    <li><a href="./info">Info</a></li>
-    <li><a href="./reviews">Reviews</a></li>
+  <div>
+    <h3>Query</h3>
+    Service:<select id="drpdwn">
+      <option value="review">review</option>
+      <option value="info">info</option>
+    </select>
+    <br>
+    Name:<input type="text" id="namebox" value="">
+    <br>
+    Genre:<input type="text" id="genrebox" value="">
+    <br>
+    <input type="button" value="Go!" onclick="req();"><br>
+  </div>
+  <div>
+    <h3>Subscribe</h3>
+    Email:<input type="text" id="subbox" value=""><br>
+    <input type="button" value="Subscribe" onclick="sub();">
+  </div>
+  <div>
+    <h3>Result:</h3><a id="res"></a>
+  </div>
   </body>
 </html>

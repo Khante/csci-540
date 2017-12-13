@@ -1,5 +1,5 @@
-import os
-import urlparse
+import os,urlparse,requests,cgi
+
 #!/usr/bin/env python
 """
 Send a GET request::
@@ -22,7 +22,9 @@ class S(BaseHTTPRequestHandler):
         if prsd.query != '':
             qprsd = urlparse.parse_qs(prsd.query)
             print qprsd
-            self.wfile.write(queryHandle(qprsd))
+            res = cgi.escape(str(queryHandle(qprsd)))
+            print 'Res:',res
+            self.wfile.write(res)
         else:
             self.path='.'+self.path
             if os.path.isdir(self.path):
@@ -40,7 +42,19 @@ class S(BaseHTTPRequestHandler):
 #Return a string/html of the query results
 #args has whatever the client sent as a dictionary.
 def queryHandle(args):
-    pass
+    s=args['service'][0]
+    if s == 'review':
+        print 'Review service selected'
+        url='http://127.0.0.1:8080' #idk how to query our service.
+        # data=args['data'][0]
+        # res=requests.post(url,data=data)
+        # return repr(res)
+    elif s == 'info':
+        print 'Info service selected'
+    else:
+        print s
+    return 'Not implemented'
+
         
 def run(server_class=HTTPServer, handler_class=S, port=8000):
     server_address = ('', port)
