@@ -20,11 +20,14 @@ Services are visible to other services via docker networking, they can be reache
 - reviews, /reviews_api (8080)
 	- `GET /api/reviews/<GAME_TITLE>`
 	- `POST /api/reviews/<GAME_TITLE>`
+		- `data: {'review_text': String, 'review_score': Int}`
 	- `GET /api/score/<GAME_TITLE>`
 - news, /news_api (5001)
 	- `GET /`
 	- `GET/POST /subscribe/`
+		- `data: {'name': String, 'channel': String}`
 	- `GET/POST /publish/`
+		- `data: {'name': String, 'channel': String, 'news': String}`
 - mongo, /data (27017)
 - redis, (6379)
 - gateway, /server (8000)
