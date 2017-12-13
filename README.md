@@ -28,6 +28,8 @@ Services are visible to other services via docker networking, they can be reache
 		- `data: {'name': String, 'channel': String}`
 	- `GET/POST /publish/`
 		- `data: {'name': String, 'channel': String, 'news': String}`
+	- `GET /subscriptions/`
+	- `GET /publications/<GAME_TITLE>`
 - mongo, /data (27017)
 - redis, (6379)
 - gateway, /server (8000)
