@@ -40,13 +40,11 @@ services:
     volumes:
       - ./data/redis:/data
 
-  # gateway:
-  #   build: server/.
-  #   ports:
-  #     - "8000:8000"
-  #   volumes:
-  #     - ./server:/usr/src/app
-  #   depends_on:
-  #     - mongo
-  #     - reviews
-  #     - info
+  gateway:
+    build: server/.
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+      - reviews
+      - info
