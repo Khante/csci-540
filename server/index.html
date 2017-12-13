@@ -6,7 +6,7 @@
   </head>
   <body class="grad">
     
-  <h1 class='rainbow'>Vidya Gaems</h1>
+  <h1>Vidya Gaems</h1>
   <div>
     <h3>Query</h3>
     Service:<select id="drpdwn" onchange="serviceChange();">
@@ -14,9 +14,10 @@
       <option value="info">info</option>
       <option value="news">news</option>
       <option value="poll">poll</option>
+      <option value="listsub">list subs</option>
     </select>
     <br>
-    <a id="titlecon">Title:<input type="text" id="namebox" value=""></a>
+    <a id="titlecon">Title:<input type="text" id="titlebox" value=""></a>
     <br>
     <a id="genrecon">Genre:<input type="text" id="genrebox" value=""></a>
     <br>
@@ -36,7 +37,7 @@
   <script>
         function req() {
             $.get(
-              'test1',
+              '',
               {
                 'service':$('#drpdwn').val(),
                 'genre':$('#genrebox').val(),

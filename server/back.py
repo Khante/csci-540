@@ -1,4 +1,4 @@
-import os,urlparse,requests,cgi
+import os,urlparse,requests,cgi,json
 
 #!/usr/bin/env python
 """
@@ -22,7 +22,7 @@ class S(BaseHTTPRequestHandler):
         if prsd.query != '':
             qprsd = urlparse.parse_qs(prsd.query)
             print qprsd
-            res = cgi.escape(str(queryHandle(qprsd)))
+            res = queryHandle(qprsd)
             print 'Res:',res
             self.wfile.write(res)
         else:
@@ -52,21 +52,28 @@ def queryHandle(args):
 
     elif s == 'info':
         print 'Info service selected'
-        url='http://news:5000/%s'%args['title'][0]
+        url='http://info:5000/games/%s'%args['title'][0]
         r = requests.get(url)
-        return r.text
-
+        res = r.json()
+        s = ''
+        for r in res:
+            if 'description' in r:
+                s+=r['description']+'<br/>'
+        return s
     elif s == 'news':
         print 'News service selected'
         channel=args['title'][0]
-        url='http://news:5001/subscribe/'
-        data={'channel': channel}
+        url='http://news:5000/subscribe/'
+        data={'channel': channel, 'data':True}
         r = requests.post(url, data=data)
-        print r
-        return r.text
+        return ''
     elif s == 'poll':
         pass
         # get a big string of all subscribed news
+    elif s == 'listsubs':
+        url='http://news:5000/subscriptions/'
+        r = requests.post(url, data=data)
+        return r.json()
     else:
         print s
     return 'Not implemented'
