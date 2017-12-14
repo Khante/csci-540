@@ -40,13 +40,13 @@ def subscribe():
     thread = pubsub.run_in_thread(sleep_time=1)
     form = SubscribeForm(request.form)
     subscriptions = redis_db.pubsub_channels()
-
     if request.method == 'POST':
         # print(request.headers.get('Content-Type'), file=sys.stderr)
         if request.headers.get('Content-Type') == 'application/json':
-            data = request.get_json(force=True)
-            if 'name' not in data or 'channel' not in data:
-                abort(400)
+            
+            data = request.get_json()
+            # if 'name' not in data or 'channel' not in data:
+            #     abort(400)
             name = data['name']
             channel = data['channel']
         else:

@@ -13,7 +13,6 @@ rand_reviews = ["Stunning", "A work of art", "Game of the Year", "Wow",
     "Stunning graphics", "Lacking content"]
 
 for game in db.games.find():
-    print game
     for i in range(random.randint(3, 7)):
         review = {"game_title": game['title'],
                   "review_text": random.choice(rand_reviews),

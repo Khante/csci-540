@@ -36,7 +36,27 @@ class S(BaseHTTPRequestHandler):
         self._set_headers()
 
     def do_POST(self):
-        pass
+        self._set_headers()
+        ctype, pdict = cgi.parse_header(self.headers.getheader('content-type'))
+        if ctype == 'multipart/form-data':
+            postvars = cgi.parse_multipart(self.rfile, pdict)
+        elif ctype == 'application/x-www-form-urlencoded':
+            length = int(self.headers.getheader('content-length'))
+            postvars = cgi.parse_qs(self.rfile.read(length), keep_blank_values=1)
+        else:
+            postvars = {}
+
+        s=postvars['service'][0]
+        if s == 'newsPost':
+            channel = postvars['channel'][0]
+            url ='http://news:5000/publish/'
+            name = 'John Hancock'
+            
+            news = postvars['text'][0]
+            requests.post(url, json={'name':name,'channel':channel,'news':news})
+        # self.wfile.write()
+
+
 
 
 #Return a string/html of the query results
@@ -46,9 +66,11 @@ def queryHandle(args):
     if s == 'review':
         print 'Review service selected'
         url='http://reviews:8080/api/reviews/%s'%args['title'][0]
-        r = requests.get(url)
-        print r
-        return r.text
+        r = requests.get(url).json()
+        s=''
+        for c in r:
+            s+='Score:%s Text:%s <br/>'%(c['review_score'] , c['review_text'])
+        return s
 
     elif s == 'info':
         print 'Info service selected'
@@ -60,19 +82,21 @@ def queryHandle(args):
             if 'description' in r:
                 s+=r['description']+'<br/>'
         return s
-    elif s == 'news':
+    elif s == 'sub': #
         print 'News service selected'
         channel=args['title'][0]
         url='http://news:5000/subscribe/'
-        data={'channel': channel, 'data':True}
-        r = requests.post(url, data=data)
+        r = requests.post(url, json={'name':'DK. DonkeyKong','channel': channel}, headers={'Content-type': 'application/json'})
         return ''
     elif s == 'poll':
-        pass
+        url='http://news:5000/publications/%s'%args['title'][0]
+        r=requests.get(url)
+        res = r.json()
+        return str(res)
         # get a big string of all subscribed news
-    elif s == 'listsubs':
+    elif s == 'listsub':
         url='http://news:5000/subscriptions/'
-        r = requests.post(url, data=data)
+        r = requests.get(url)
         return r.json()
     else:
         print s

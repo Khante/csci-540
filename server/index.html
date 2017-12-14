@@ -12,7 +12,7 @@
     Service:<select id="drpdwn" onchange="serviceChange();">
       <option value="review">review</option>
       <option value="info">info</option>
-      <option value="news">news</option>
+      <option value="sub">subscribe</option>
       <option value="poll">poll</option>
       <option value="listsub">list subs</option>
     </select>
@@ -31,8 +31,11 @@
   </div>
 
   <div>
-    <h3>Post</h3>
-
+    <h3>Post News</h3>
+    Channel:<input type="text" id="channelbox" value=""><br/>
+    News:<textarea rows="4" cols="50" id="newsbox"></textarea><br/>
+    <input type="button" value="Post" onclick="postNews();"><br>
+  </div>
 
   <script>
         function req() {
@@ -49,22 +52,33 @@
                 $("#res").append('<br/>')});
         }
 
+        function postNews() {
+          $.post(
+            '',
+            {
+              'service':'newsPost',
+              'channel':$('#channelbox').val(),
+              'text':$('#newsbox').val()
+            },function(data){})
+        }
+
         function serviceChange() {
           var v = $('#drpdwn').val()
           $('#genrecon').prop('hidden', true)
           $('#titlecon').prop('hidden', true)
           $('#uidcon').prop('hidden', true)
-          if (v == 'news') {
+          if (v == 'sub') {
             $('#titlecon').prop('hidden', false)
             // $('#uidcon').prop('hidden', false)            
           } else if (v == 'review') {
             $('#titlecon').prop('hidden', false)
           } else if (v == 'info') {
-            $('#genrecon').prop('hidden', false)
+            // $('#genrecon').prop('hidden', false)
+            $('#titlecon').prop('hidden', false)
+          } else if (v == 'poll') {
             $('#titlecon').prop('hidden', false)
           }
         }
-
         serviceChange();
     </script>
   </body>
