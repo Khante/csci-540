@@ -92,7 +92,7 @@ code {
   margin-top: 0;
 }
 .grad {
-  background: linear-gradient(rgb(150, 150, 150), rgb(50,50,50));
+  background: linear-gradient(rgb(150, 150, 150), rgb(150,150,150));
 }
 
 div {
@@ -100,6 +100,8 @@ div {
   vertical-align: top;
   /* border-style: solid hidden hidden solid; */
 }
+
+
 
 h1,h2{
   text-align:center;
@@ -142,20 +144,3 @@ h1,h2{
 	100%{color: orange;}	
 }
 
-body {
-  background-color: #ecf0f1;
-}
-h1 {
-  font-size: 5em;
-  font-weight: 400;
-  text-align: center;
-  color: #3498db;
-  transition: width 2s, height 2s, color 5s, text-shadow 2s;
-  -webkit-transition: width 2s, height 2s, -webkit-transform 2s, color 2s, text-shadow 2s;
-}
-h1:hover {
-transform:rotate(360deg);
--webkit-transform:rotate(360deg); /* Safari */
-  color: #e67e22;
-  text-shadow: 2px 1px #d35400, 3px 2px #d35400, 4px 3px #d35400, 5px 4px #d35400, 6px 5px #d35400, 7px 6px #d35400; 
-}

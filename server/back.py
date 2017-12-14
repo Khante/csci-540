@@ -92,8 +92,10 @@ def queryHandle(args):
         url='http://news:5000/publications/%s'%args['title'][0]
         r=requests.get(url)
         res = r.json()
-        return str(res)
-        # get a big string of all subscribed news
+        if len(res) > 0:
+            return str(res[0])
+        else:
+            return ''
     elif s == 'listsub':
         url='http://news:5000/subscriptions/'
         r = requests.get(url)

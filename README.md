@@ -6,6 +6,9 @@ A project built around the microservices architecture that provides video-game r
 - Game Reviews:  Allows the user to post new reviews for a video game as well as fetch all reviews for a title and fetch an average score for a title.
 - Game News:  Uses Redis to provide endpoints for a publish-subscribe system where a user can subscribe to a channel and receive news published to that channel.  Currently no integrations with the actual database.
 
+## Requirements
+* Docker
+
 ## Running Instructions
 
 Run `docker-compose build` to update build.

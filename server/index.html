@@ -27,14 +27,14 @@
   </div>
 
   <div>
-    <h3>Result:</h3><a id="res"></a>
-  </div>
-
-  <div>
     <h3>Post News</h3>
     Channel:<input type="text" id="channelbox" value=""><br/>
     News:<textarea rows="4" cols="50" id="newsbox"></textarea><br/>
     <input type="button" value="Post" onclick="postNews();"><br>
+  </div>
+
+  <div>
+    <h3>Result:</h3><a id="res"></a>
   </div>
 
   <script>
@@ -48,8 +48,8 @@
                 'uid':$('#uidbox').val()
               },
               function(data){
-                $("#res").append(jQuery.parseHTML(data));
-                $("#res").append('<br/>')});
+                $("#res").html('<br/>');
+                $("#res").html(jQuery.parseHTML(data))});
         }
 
         function postNews() {
