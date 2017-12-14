@@ -93,7 +93,7 @@ def queryHandle(args):
         r=requests.get(url)
         res = r.json()
         if len(res) > 0:
-            return str(res[0])
+            return '<br/>'.join(res)
         else:
             return ''
     elif s == 'listsub':
